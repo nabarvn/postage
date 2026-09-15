@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { cn, constructMetadata } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Fira_Code, Merriweather, Spectral } from "next/font/google";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <ThemeProvider>{children}</ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
