@@ -134,7 +134,7 @@ This creates your two webhook routes:
 
 **Resend**
 
-- Grab your `*.resend.app` subdomain from the Receiving tab. Set `NEXT_PUBLIC_RESEND_RECEIVING_ADDRESS` in `.env`.
+- Set `NEXT_PUBLIC_RESEND_RECEIVING_ADDRESS` in `.env` to your `*.resend.app` receiving address.
 - Create and publish your templates (Citation and Notice). Add the required string variables to Citation (`TITLE`, `CATEGORY`, `SYNOPSIS`, `AWARD`, `NOTE`, `VERDICT`) and Notice (`NOTICE`). Set their respective `RESEND_*_TEMPLATE_ID`s in `.env`.
 - Add a custom domain and verify your DNS records. Set `RESEND_FROM` in `.env`. Optionally, enable **Receiving** (requires an MX record) and set `NEXT_PUBLIC_CUSTOM_RECEIVING_ADDRESS` to accept submissions on your own branded email address.
 - Create an API key and copy it to `RESEND_API_KEY` in `.env`.
@@ -165,7 +165,7 @@ pnpm dev
 - Mux generates captions before doing anything else. Once ready, the general screening and key moments tasks run at the same time. The note task runs last, focused specifically on the best moment found in the video.
 - The Resend webhook only provides metadata, so the app fetches the actual email body right after. Replies stay in the correct thread using an `In-Reply-To` header and use a unique key to prevent duplicate sends.
 - Because key moments use milliseconds and the note scope uses seconds, the end time is pulled back by one millisecond. This ensures the reading window never exceeds the total video duration.
-- Only public video links work. Google Drive and Dropbox links are automatically rewritten into direct download URLs so Mux can process them. Internal network links and URLs buried in old email replies are completely ignored.
+- Only public video links work. Google Drive and Dropbox links are rewritten into direct download URLs so Mux can process them. Internal network links and URLs buried in old email replies are ignored.
 - If key moments detection fails, the note evaluation runs unscoped; if the note task fails, the citation is generated directly from screening outputs; and processed assets in Mux are pruned automatically to keep only the five most recent submissions.
 
 <hr />
